@@ -111,11 +111,16 @@ header.shadow .logo{
 
     .home-title{
         font-size: 3.5rem;
+        text-align: center;
+        color: #f23c0a;
     }
 
     .home-subtitle{
         font-size: 1rem;
         font-weight: 400;
+        color: #fff;
+        text-align: center;
+        margin: 10px auto;
     }
 
 .post-filter{

@@ -91,6 +91,11 @@ public class BlogController {
         return "index";
     }
 
+    @PostMapping("/login")
+    public String login(){
+        return "redirect:/dashboard";
+    }
+
     @PostMapping("/dashboard/blog/{id}")
     public String getBlogById(@PathVariable("id") long id, Model model){
         Blog blog = blogService.getBlogById(id);
