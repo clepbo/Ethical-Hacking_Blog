@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blog Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{./admin.css}" media="all" href="../../static/admin.css"
+           type="text/css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Blog Admin Dashboard</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#">Dashboard</a></li>
+                <li><a href="manage-blogs.html">Manage Blogs</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Comments</a></li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <h2>Add Blog</h2>
+            <form th:action="@{/dashboard/save}" th:object="${blog}" method="post"  enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="blogTitle">Title</label>
+                    <input type="text" class="form-control" id="blogTitle" name="blogTitle" th:field="*{blogTitle}" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogDescription">Description</label>
+                    <textarea class="form-control" id="blogDescription" name="blogDescription" th:field="*{blogDescription}" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="blogContent">Blog Content</label>
+                    <textarea class="form-control" id="blogContent" name="blogContent" th:field="*{blogContent}" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="blogAuthor">Author</label>
+                    <input type="text" class="form-control" id="blogAuthor" name="blogAuthor" th:field="*{blogAuthor}" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogCategory">Category</label>
+                    <select class="form-control" id="blogCategory" name="blogCategory" th:field="*{blogCategory}" required>
+                        <option value="Technology">Ethical Hacking</option>
+                        <option value="Business">Cyber Security</option>
+                        <option value="Entertainment">Cyber Attack</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="blogTag">Tags</label>
+                    <input type="text" class="form-control" id="blogTag" name="blogTag" th:field="*{blogTag}" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogPicture">Pictures</label>
+                    <input type="file" class="form-control" id="blogPicture" name="blogPicture" th:field="*{blogPicture}" accept="image/*" required>
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="blogEbook">E-book</label>-->
+<!--                    <input type="file" class="form-control" id="blogEbook" name="blogEbook" th:field="*{blogEbook}" accept="application/pdf" required>-->
+<!--                </div>-->
+                <button type="submit" class="btn btn-primary">Add Blog</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
