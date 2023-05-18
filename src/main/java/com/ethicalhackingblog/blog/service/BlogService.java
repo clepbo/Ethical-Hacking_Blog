@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface BlogService {
-    Blog saveBlog (Blog blog, MultipartFile blogPicture, MultipartFile blogEbook)throws IOException;
+    Blog saveBlog (Blog blog, MultipartFile blogPicture)throws IOException;
     List<Blog> getAllBlogs();
 
     Blog editBlog(long id);

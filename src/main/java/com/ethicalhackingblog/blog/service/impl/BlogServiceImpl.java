@@ -27,21 +27,13 @@ public class BlogServiceImpl implements BlogService {
 
     private final ResourceLoader resourceLoader;
     @Override
-    public Blog saveBlog(Blog blog, MultipartFile blogPicture, MultipartFile blogEbook) throws IOException {
-            if (!blogPicture.isEmpty()) {
-                byte[] pictureBytes = blogPicture.getBytes();
-                log.info("Uploading... {}", pictureBytes);
-                //System.out.println(pictureBytes);
-                blog.setBlogPicture(pictureBytes);
-            }
-            if (!blogEbook.isEmpty()) {
-                byte[] ebookBytes = blogEbook.getBytes();
-                log.info("Uploading... {}", ebookBytes);
-                //System.out.println(ebookBytes);
-                blog.setBlogEbook(ebookBytes);
-            }
-            return blogRepository.save(blog);
-
+    public Blog saveBlog(Blog blog, MultipartFile blogPicture) throws IOException {
+        if (blogPicture != null && !blogPicture.isEmpty()) {
+            byte[] pictureBytes = blogPicture.getBytes();
+            //log.info("Uploading blog picture... {}", pictureBytes);
+            blog.setBlogPicture(pictureBytes);
+        }
+        return blogRepository.save(blog);
     }
 
     @Override
@@ -70,7 +62,7 @@ public class BlogServiceImpl implements BlogService {
 
         for (Blog image : images) {
             byte[] imageData = image.getBlogPicture();
-            System.out.println(imageData);
+            //System.out.println(imageData);
 
             try {
                 String fileName = image.getId()+".jpg";

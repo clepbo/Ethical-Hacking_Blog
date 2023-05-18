@@ -3,14 +3,18 @@ package com.ethicalhackingblog.blog.controller;
 import com.ethicalhackingblog.blog.exception.BlogNotFoundException;
 import com.ethicalhackingblog.blog.model.Blog;
 import com.ethicalhackingblog.blog.service.BlogService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
@@ -32,12 +36,19 @@ public class BlogController {
 
     @PostMapping("/dashboard/save")
     public String createBlog(RedirectAttributes redirectAttributes, @ModelAttribute("blog") Blog blog,
-                             @RequestParam("blogPicture") MultipartFile blogPicture,
-                             @RequestParam("blogEbook") MultipartFile blogEbook) throws IOException {
+                             @RequestParam("blogPicture") MultipartFile blogPicture) throws IOException {
 
-            blogService.saveBlog(blog, blogPicture, blogEbook);
+            blogService.saveBlog(blog, blogPicture);
             redirectAttributes.addFlashAttribute("message", "Blog has been uploaded");
             return "redirect:/dashboard/manage-blog";
+    }
+    @InitBinder
+    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder)
+            throws ServletException {
+
+        // Convert multipart object to byte[]
+        binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+
     }
 
     @GetMapping("/dashboard/manage-blog")
@@ -72,11 +83,11 @@ public class BlogController {
         return "redirect:/dashboard/manage-blog";
     }
 
-    @GetMapping("/blog")
+    @GetMapping("/")
     public String blogPage(Model model){
         blogService.saveAllImagesToStaticFolder();
         List<Blog> allBlogs = blogService.getAllBlogs();
-        model.addAttribute("blog", allBlogs);
+        model.addAttribute("blogs", allBlogs);
         return "index";
     }
 

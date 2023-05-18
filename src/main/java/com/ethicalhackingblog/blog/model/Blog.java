@@ -34,13 +34,9 @@ public class Blog {
     @Column(name="blog_tag")
     private String blogTag;
 
-    @Column(name="blog_picture", columnDefinition = "BLOB")
+    @Column(name="blog_picture", columnDefinition = "LONGBLOB")
     @Lob
     private byte[] blogPicture;
-
-    @Column(name="blog_ebook", columnDefinition = "BLOB")
-    @Lob
-    private byte[] blogEbook;
 
     @Column(name="date_posted")
     @CreationTimestamp

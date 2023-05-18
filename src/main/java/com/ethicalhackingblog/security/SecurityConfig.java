@@ -21,9 +21,9 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
 
 
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .dispatcherTypeMatchers(HttpMethod.valueOf("/login")).permitAll()
-                .dispatcherTypeMatchers(HttpMethod.valueOf("/signup")).permitAll()
+        http
+                .authorizeRequests()
+                .requestMatchers("/login/**", "/blog/index.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

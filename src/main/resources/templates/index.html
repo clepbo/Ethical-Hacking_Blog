@@ -14,7 +14,7 @@
 <header>
     <div class="nav container">
         <a href="#" class="logo">Info<span>Tech</span></a>
-        <a href="#" class="login">Login</a>
+        <a th:href="@{/login}" class="login">Login</a>
     </div>
 </header>
 
@@ -42,8 +42,8 @@
 <section class="post container">
 
     <!-- post box 1 -->
-    <div th:each="blog : ${blog}" class="post-box ethical">
-        <img th:src="@{/static/image/${blog.id}.jpg}" alt="" class="post-img">
+    <div th:each="blog : ${blogs}" class="post-box ethical">
+        <img th:src="@{'/blogImage/' + ${blog.id} + '.jpg'}" alt="" class="post-img">
         <h2 class="category">[[${blog.blogCategory}]]</h2>
         <a th:href="@{'/dashboard/blog/' + ${blog.id}}" class="post-title">[[${blog.blogTitle}]]</a>
         <span class="post-date">[[${blog.datePosted}]]</span>
@@ -51,138 +51,10 @@
 
         <!-- profile -->
         <div class="profile">
-            <img th:src="@{/static/image/${blog.id}.jpg}" alt="" class="profile-img">
+            <img th:src="@{'/blogImage/' + ${blog.id} + '.jpg'}" alt="" class="profile-img">
             <span class="profile-name">[[${blog.blogAuthor}]]</span>
         </div>
     </div>
-
-<!--    &lt;!&ndash; post box 2 &ndash;&gt;-->
-<!--    <div class="post-box security">-->
-<!--        <img src="../static/image/img2.jpeg" alt="" class="post-img">-->
-<!--        <h2 class="category">Cyber Security</h2>-->
-<!--        <a href="post-page.html" class="post-title">Things to know about Cyber Security</a>-->
-<!--        <span class="post-date"> 27th Oct</span>-->
-<!--        <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos illo velit eaque-->
-<!--            exercitationem veritatis debitis alias facere voluptatem officia nam.</p>-->
-
-<!--        &lt;!&ndash; profile &ndash;&gt;-->
-<!--        <div class="profile">-->
-<!--            <img src="../static/image/img1.jpg" alt="" class="profile-img">-->
-<!--            <span class="profile-name"> Oni Israel</span>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; post box 3 &ndash;&gt;-->
-<!--    <div class="post-box attackers">-->
-<!--        <img src="../static/image/img3.jfif" alt="" class="post-img">-->
-<!--        <h2 class="category">Cyber Attackers</h2>-->
-<!--        <a href="post-page.html" class="post-title">Things to know about Cyber Attackers</a>-->
-<!--        <span class="post-date"> 5th June</span>-->
-<!--        <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos illo velit eaque-->
-<!--            exercitationem veritatis debitis alias facere voluptatem officia nam.</p>-->
-
-<!--        &lt;!&ndash; profile &ndash;&gt;-->
-<!--        <div class="profile">-->
-<!--            <img src="../static/image/img2.jpeg" alt="" class="profile-img">-->
-<!--            <span class="profile-name"> Ozor Chidi</span>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; post box 4 &ndash;&gt;-->
-<!--    <div class="post-box ethical">-->
-<!--        <img src="../static/image/img1.jpg" alt="" class="post-img">-->
-<!--        <h2 class="category">Ethical Hackng</h2>-->
-<!--        <a href="post-page.html" class="post-title">Things to know about ethical hacking</a>-->
-<!--        <span class="post-date"> 23rd May</span>-->
-<!--        <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos illo velit eaque-->
-<!--            exercitationem veritatis debitis alias facere voluptatem officia nam.</p>-->
-
-<!--        &lt;!&ndash; profile &ndash;&gt;-->
-<!--        <div class="profile">-->
-<!--            <img src="../static/image/img3.jfif" alt="" class="profile-img">-->
-<!--            <span class="profile-name"> Abraham Peters</span>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; post box 5 &ndash;&gt;-->
-<!--    <div class="post-box security">-->
-<!--        <img src="../static/image/img2.jpeg" alt="" class="post-img">-->
-<!--        <h2 class="category">Cyber Security</h2>-->
-<!--        <a href="post-page.html" class="post-title">Things to know about Cyber Security</a>-->
-<!--        <span class="post-date"> 27th Oct</span>-->
-<!--        <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos illo velit eaque-->
-<!--            exercitationem veritatis debitis alias facere voluptatem officia nam.</p>-->
-
-<!--        &lt;!&ndash; profile &ndash;&gt;-->
-<!--        <div class="profile">-->
-<!--            <img src="../static/image/img1.jpg" alt="" class="profile-img">-->
-<!--            <span class="profile-name"> Oni Israel</span>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; post box 6 &ndash;&gt;-->
-<!--    <div class="post-box attackers">-->
-<!--        <img src="../static/image/img3.jfif" alt="" class="post-img">-->
-<!--        <h2 class="category">Cyber Attackers</h2>-->
-<!--        <a href="post-page.html" class="post-title">Things to know about Cyber Attackers</a>-->
-<!--        <span class="post-date"> 5th June</span>-->
-<!--        <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos illo velit eaque-->
-<!--            exercitationem veritatis debitis alias facere voluptatem officia nam.</p>-->
-
-<!--        &lt;!&ndash; profile &ndash;&gt;-->
-<!--        <div class="profile">-->
-<!--            <img src="../static/image/img2.jpeg" alt="" class="profile-img">-->
-<!--            <span class="profile-name"> Ozor Chidi</span>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; post box 7 &ndash;&gt;-->
-<!--    <div class="post-box ethical">-->
-<!--        <img src="../static/image/img1.jpg" alt="" class="post-img">-->
-<!--        <h2 class="category">Ethical Hackng</h2>-->
-<!--        <a href="post-page.html" class="post-title">Things to know about ethical hacking</a>-->
-<!--        <span class="post-date"> 23rd May</span>-->
-<!--        <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos illo velit eaque-->
-<!--            exercitationem veritatis debitis alias facere voluptatem officia nam.</p>-->
-
-<!--        &lt;!&ndash; profile &ndash;&gt;-->
-<!--        <div class="profile">-->
-<!--            <img src="../static/image/img3.jfif" alt="" class="profile-img">-->
-<!--            <span class="profile-name"> Abraham Peters</span>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; post box 8 &ndash;&gt;-->
-<!--    <div class="post-box security">-->
-<!--        <img src="../static/image/img2.jpeg" alt="" class="post-img">-->
-<!--        <h2 class="category">Cyber Security</h2>-->
-<!--        <a href="post-page.html" class="post-title">Things to know about Cyber Security</a>-->
-<!--        <span class="post-date"> 27th Oct</span>-->
-<!--        <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos illo velit eaque-->
-<!--            exercitationem veritatis debitis alias facere voluptatem officia nam.</p>-->
-
-<!--        &lt;!&ndash; profile &ndash;&gt;-->
-<!--        <div class="profile">-->
-<!--            <img src="../static/image/img1.jpg" alt="" class="profile-img">-->
-<!--            <span class="profile-name"> Oni Israel</span>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; post box 9 &ndash;&gt;-->
-<!--    <div class="post-box attackers">-->
-<!--        <img src="../static/image/img3.jfif" alt="" class="post-img">-->
-<!--        <h2 class="category">Cyber Attackers</h2>-->
-<!--        <a href="post-page.html" class="post-title">Things to know about Cyber Attackers</a>-->
-<!--        <span class="post-date"> 5th June</span>-->
-<!--        <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos illo velit eaque-->
-<!--            exercitationem veritatis debitis alias facere voluptatem officia nam.</p>-->
-
-<!--        &lt;!&ndash; profile &ndash;&gt;-->
-<!--        <div class="profile">-->
-<!--            <img src="../static/image/img2.jpeg" alt="" class="profile-img">-->
-<!--            <span class="profile-name"> Ozor Chidi</span>-->
-<!--        </div>-->
-<!--    </div>-->
 
 </section>
 
@@ -193,10 +65,10 @@
 
 <!--jquery link-->
 <script
-        src="https://code.jquery.com/jquery-3.7.0.js"
+        th:src="@{https://code.jquery.com/jquery-3.7.0.js}"
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"></script>
 <!-- internal javascript -->
-<script src="../static/app.js"></script>
+<script src="../static/app.js" th:src="@{./app.js}"></script>
 </body>
 </html>
