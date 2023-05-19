@@ -21,7 +21,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests((authz) -> {
                     authz
-                            .requestMatchers("/login/**", "/blog/index.html").permitAll()
+                            .requestMatchers("/login/**", "/blog/index.html", "/blog").permitAll()
                             .anyRequest().authenticated();
                 })
                 .formLogin((formLogin) -> {
@@ -29,7 +29,7 @@ public class SecurityConfig {
                             .loginPage("/login")
                             .usernameParameter("username")
                             .permitAll()
-                            .defaultSuccessUrl("/login", true); // Redirect to "/login" on successful login
+                            .defaultSuccessUrl("/dashboard", true); // Redirect to "/login" on successful login
                 })
                 .logout((logout) -> {
                     logout

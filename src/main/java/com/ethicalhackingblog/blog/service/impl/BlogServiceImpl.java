@@ -58,20 +58,35 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public void saveAllImagesToStaticFolder() {
-        List<Blog> images = blogRepository.findAll();
+        // Delete all existing images in the folder
+        String folderPath = "src/main/resources/static/blogImage/";
+        File folder = new File(folderPath);
+        File[] files = folder.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    file.delete();
+                }
+            }
+        }
 
-        for (Blog image : images) {
-            byte[] imageData = image.getBlogPicture();
-            //System.out.println(imageData);
-
-            try {
-                String fileName = image.getId()+".jpg";
-                Path destinationFile = Paths.get("src/main/resources/static/blogImage/", fileName);
-                Files.write(destinationFile, imageData);
-            } catch (IOException e) {
+        // Save the new images
+        List<Blog> blogs = blogRepository.findAll();
+        for (Blog blog : blogs) {
+            byte[] imageData = blog.getBlogPicture();
+            if (imageData != null && imageData.length > 0) {
+                try {
+                    String fileName = blog.getId() + ".jpg";
+                    Path destinationFile = Paths.get(folderPath, fileName);
+                    Files.write(destinationFile, imageData);
+                } catch (IOException e) {
+                    // Handle file processing error
+                    e.printStackTrace();
+                }
             }
         }
     }
+
 
     @Override
     public Blog getBlogById(long id) {
