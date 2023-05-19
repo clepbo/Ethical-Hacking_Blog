@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class BlogController {
+
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
 
     private final BlogService blogService;
 
@@ -91,10 +97,6 @@ public class BlogController {
         return "index";
     }
 
-    @PostMapping("/login")
-    public String login(){
-        return "redirect:/dashboard";
-    }
 
     @PostMapping("/dashboard/blog/{id}")
     public String getBlogById(@PathVariable("id") long id, Model model){
@@ -102,4 +104,5 @@ public class BlogController {
         model.addAttribute("blog", blog);
         return "post-page";
     }
+
 }

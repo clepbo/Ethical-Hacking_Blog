@@ -40,6 +40,6 @@ public class Blog {
 
     @Column(name="date_posted")
     @CreationTimestamp
-    private LocalDateTime datePosted;
+    private LocalDate datePosted = LocalDate.now();
 
 }

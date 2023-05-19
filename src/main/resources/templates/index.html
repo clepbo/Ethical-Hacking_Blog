@@ -20,7 +20,7 @@
 
 <!-- home -->
 <section class="home" id="home">
-    <div class="hopme-text container">
+    <div class="home-text container">
         <h2 class="home-title"> The InfoTech Blog</h2>
         <span class="home-subtitle">Ethical Hacking and Cyber security Issues in Nigeria</span>
     </div>
@@ -46,7 +46,7 @@
         <img th:src="@{'/blogImage/' + ${blog.id} + '.jpg'}" alt="" class="post-img">
         <h2 class="category">[[${blog.blogCategory}]]</h2>
         <a th:href="@{'/dashboard/blog/' + ${blog.id}}" class="post-title">[[${blog.blogTitle}]]</a>
-        <span class="post-date">[[${blog.datePosted}]]</span>
+        <span class="post-date"><span>Posted on &nbsp;</span> [[${blog.datePosted}]]</span>
         <p class="post-description">[[${blog.blogContent}]]</p>
 
         <!-- profile -->
