@@ -8,43 +8,98 @@
     <link rel="stylesheet" th:href="@{./style.css}" media="all" href="../../static/style.css"
           type="text/css"/>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+
+    <style>
+        /* Custom Styles */
+        body {
+            padding-top: 70px;
+        }
+
+        .header-img {
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        .post-header {
+            background-color: #f8f9fa;
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        .post-content {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .sub-heading {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .post-container{
+            max-width: 900px;
+            margin: 30px auto;
+            text-align: justify;
+        }
+
+        .post-text {
+            font-size: 17px;
+            line-height: 1.8;
+            text-align: justify;
+            color: #555555;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body>
 <!-- header -->
-<header>
-    <div class="nav container">
-        <a href="index.html" class="logo">Info<span>Tech</span></a>
-        <a href="#" class="login">Login</a>
+<header class="fixed-top bg-white shadow">
+    <div class="container">
+        <a th:href="@{/}" class="logo navbar-brand">Info<span>Tech</span></a>
+        <a th:href="@{/login}" class="login btn btn-primary">Login</a>
     </div>
 </header>
 
 <!-- post content-->
 <section class="post-header">
-    <div class="header-content post-container">
+    <div class="header-content post-container text-center">
         <!-- back to home-->
-        <a href="index.html" class="back-home">Back To Home</a>
+        <a th:href="@{/}" class="back-home">Back To Home</a>
         <!-- title -->
-        <h1 class="header-title" th:text="${blog.blogTitle}"> </h1>
+        <h1 class="header-title" th:text="${blog.blogTitle}"></h1>
         <!-- post image-->
-        <img th:src="@{'/blogImage/' + ${blog.id} + '.jpg'}" alt="" class="header-img">
+        <img th:src="@{'/blogImage/' + ${blog.id} + '.jpg'}" alt="" class="header-img img-fluid">
     </div>
 </section>
 
-<section class="post-content post-container">
-    <h2 class="sub-heading" th:text="${blog.blogDescription}></h2>
-    <p class="post-text" th:text="${blog.blogContent}></p>
+<section class="post-container">
+    <div class ="post-content">
+        <h2 class="sub-heading" th:text="${blog.blogDescription}"></h2>
+        <p class="post-text" th:text="${blog.blogContent}"></p>
+    </div>
 </section>
 
 <!-- footer -->
-<div class="footer container">
-    <p>&#169; All Rights Reserverd 2023</p>
-</div>
+<footer class="footer">
+    <div class="container">
+        <p>&#169; All Rights Reserved 2023</p>
+    </div>
+</footer>
 
-<!--jquery link-->
-<script
-        src="https://code.jquery.com/jquery-3.7.0.js"
-        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"></script>
+<!-- Bootstrap JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- internal javascript -->
 <script src="../static/app.js"></script>
 </body>

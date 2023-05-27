@@ -7,7 +7,59 @@
     <title>Ethical Hacking & Cyber Security Blog</title>
     <link rel="stylesheet" th:href="@{./style.css}" media="all" href="../../static/style.css"
           type="text/css"/>
+<script>
+    // Ajax code for handling form submission
+    $(document).ready(function() {
+        // Comment form submission
+        $('#comment-form').submit(function(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+            var formData = $(this).serialize(); // Serialize form data
 
+            // Ajax request
+            $.ajax({
+                type: 'POST',
+                url: '/comment/save', // Replace with your server-side endpoint
+                data: formData,
+                success: function(response) {
+                    // Handle success response here
+                    console.log('Comment submitted successfully!');
+                    // You can display a success message or perform any other actions
+                    alert(response.message); // Display the response message
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response here
+                    console.error('Error submitting comment:', error);
+                    // You can display an error message or perform any other error handling
+                }
+            });
+        });
+
+        // Complaint form submission
+        $('#complaint-form').submit(function(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+            var formData = $(this).serialize(); // Serialize form data
+
+            // Ajax request
+            $.ajax({
+                type: 'POST',
+                url: '/complaint/save', // Replace with your server-side endpoint
+                data: formData,
+                success: function(response) {
+                    // Handle success response here
+                    console.log('Complaint submitted successfully!');
+                    // You can display a success message or perform any other actions
+                    alert(response.message); // Display the response message
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response here
+                    console.error('Error submitting complaint:', error);
+                    // You can display an error message or perform any other error handling
+                }
+            });
+        });
+    });
+
+</script>
 </head>
 <body>
 <!-- header -->
@@ -30,9 +82,11 @@
 <!-- post filter -->
 <div class="post-filter container">
     <span class="filter-item active-filter" data-filter='all'> All articles</span>
-    <span class="filter-item" data-filter='ethical'> Ethical Hacking</span>
-    <span class="filter-item" data-filter='security'> Cyber Security</span>
-    <span class="filter-item" data-filter='attackers'> Cyber Attackers</span>
+    <span class="filter-item" data-filter='Technology'> Ethical Hacking</span>
+    <span class="filter-item" data-filter='Business'> Cyber Security</span>
+    <span class="filter-item" data-filter='Entertainment'> Cyber Attackers</span>
+    <span class="filter-item" data-filter='comment'> Comment</span>
+    <span class="filter-item" data-filter='complaints'> Compliants</span>
 </div>
 
 
@@ -40,8 +94,8 @@
 <section class="post container">
 
     <!-- post box 1 -->
-    <div th:each="blog : ${blogs}" class="post-box ethical">
-        <img th:src="@{'/blogImage/' + ${blog.id} + '.jpg'}" alt="" class="post-img">
+    <div th:each="blog : ${blogs}" th:classappend="'post-box ' + ${blog.blogCategory}">
+    <img th:src="@{'/blogImage/' + ${blog.id} + '.jpg'}" alt="" class="post-img">
         <h2 class="category">[[${blog.blogCategory}]]</h2>
         <a th:href="@{'/dashboard/blog/' + ${blog.id}}" class="post-title">[[${blog.blogTitle}]]</a>
         <span class="post-date"><span>Posted on &nbsp;</span> [[${blog.datePosted}]]</span>
@@ -55,6 +109,37 @@
     </div>
 
 </section>
+
+<!-- comment form -->
+<div id="comment-div" style="display: none;">
+    <form th:action="@{/comment/save}" th:object="${comment}" method="post" id="comment-form">
+        <div class="form-group">
+            <label for="commentEmail">Email</label>
+            <input type="email" id="commentEmail" name="email" class="form-control" th:field="*{email}" required>
+        </div>
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea id="comment" name="comment_text" class="form-control" th:field="*{comment_text}" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
+</div>
+
+<!-- complaint form -->
+<div id="complaint-div" style="display: none;">
+    <form th:action="@{/complaint/save}" th:object="${complaint}" method="post" id="complaint-form">
+        <div class="form-group">
+            <label for="complaintEmail">Email</label>
+            <input type="email" id="complaintEmail" name="email" class="form-control" th:field="*{email}" required>
+        </div>
+        <div class="form-group">
+            <label for="complaint">Complaint</label>
+            <textarea id="complaint" name="complaint_text" class="form-control" th:field="*{complaint_text}" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Complaint</button>
+    </form>
+</div>
+
 
 <!-- footer -->
 <div class="footer container">
